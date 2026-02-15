@@ -3,75 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chúc Mừng Năm Mới 2026 - Công Chúa Huyền Trâm</title>
+<title>Chúc Mừng Năm Mới 2026 💖 Công Chúa Huyền Trâm</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 body{
-    margin:0;
-    overflow:hidden;
-    background:radial-gradient(circle at bottom,#020111,#000);
-    font-family:'Pacifico',cursive;
-    color:white;
-    text-align:center;
+  margin:0;
+  overflow:hidden;
+  background:radial-gradient(circle at bottom,#020111,#000);
+  font-family:'Pacifico',cursive;
+  color:white;
+  text-align:center;
 }
-canvas{
-    position:fixed;
-    inset:0;
-}
+canvas{position:fixed;inset:0;}
+
 .container{
-    position:absolute;
-    width:100%;
-    top:50%;
-    transform:translateY(-50%);
-    z-index:10;
-    animation:fadeIn 3s ease;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+  width:100%;
+  padding:20px;
 }
+
 h1{
-    font-size:3em;
-    color:#ffd700;
-    text-shadow:0 0 20px gold,0 0 50px red;
-    animation:glow 2s infinite alternate;
+  font-size:3em;
+  color:#ffd700;
+  text-shadow:0 0 20px gold,0 0 40px red;
 }
-p{
-    font-size:1.4em;
-    margin:8px;
-    color:#ffb6c1;
-    text-shadow:0 0 10px hotpink;
+
+#typing p{
+  font-size:1.5em;
+  color:#ffb6c1;
+  text-shadow:0 0 10px hotpink;
+  min-height:32px;
 }
-@keyframes glow{
-    from{ text-shadow:0 0 10px gold;}
-    to{ text-shadow:0 0 30px gold,0 0 60px red;}
-}
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
+
 .heart{
-    position:absolute;
-    color:pink;
-    font-size:20px;
-    animation:fall 8s linear infinite;
+  position:absolute;
+  color:pink;
+  font-size:20px;
+  animation:fall 8s linear infinite;
 }
+
+.flower{
+  position:absolute;
+  color:#ff9;
+  font-size:22px;
+  animation:fall 10s linear infinite;
+}
+
 @keyframes fall{
-    0%{ transform:translateY(-10vh); opacity:1;}
-    100%{ transform:translateY(110vh); opacity:0;}
+  from{transform:translateY(-10vh);opacity:1}
+  to{transform:translateY(110vh);opacity:0}
 }
 </style>
 </head>
+
 <body>
 
 <canvas id="fireworks"></canvas>
 
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2023/12/20/audio_9b7fbc1c91.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
-    <h1>🎆 Chúc Mừng Năm Mới 2026 🎆</h1>
-    <p>Gửi đến <b>Công Chúa Huyền Trâm</b> 💖</p>
-    <p>Mong em một năm mới thật rực rỡ,</p>
-    <p>Luôn xinh đẹp, hạnh phúc và bình an ✨</p>
-    <p>Mọi ước mơ đều thành hiện thực 🌸</p>
-    <p>Và luôn được yêu thương thật nhiều ❤️</p>
+  <h1>🎆 Chúc Mừng Năm Mới 2026 🎆</h1>
+  <div id="typing"></div>
 </div>
 
 <script>
+const textLines=[
+  "Gửi đến 💖 Công Chúa Huyền Trâm 💖",
+  "Chúc em một năm mới tràn đầy yêu thương ✨",
+  "Luôn xinh đẹp, hạnh phúc và bình an 🌸",
+  "Mọi ước mơ đều thành hiện thực 💫",
+  "Chúc em luôn mỉm cười mỗi ngày ❤️"
+];
+
+let line=0, char=0;
+const box=document.getElementById("typing");
+
+function typeText(){
+  if(line<textLines.length){
+    if(char<textLines[line].length){
+      box.innerHTML+=textLines[line][char++];
+      setTimeout(typeText,50);
+    }else{
+      box.innerHTML+="<br>";
+      char=0;
+      line++;
+      setTimeout(typeText,600);
+    }
+  }
+}
+typeText();
+
+function heart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(Math.random()*3+5)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+}
+setInterval(heart,300);
+
+function flower(){
+  const f=document.createElement("div");
+  f.className="flower";
+  f.innerHTML="🌸";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(Math.random()*5+7)+"s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),12000);
+}
+setInterval(flower,700);
+
+// Fireworks
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 canvas.width=innerWidth;
@@ -81,19 +134,19 @@ class Firework{
   constructor(){
     this.x=Math.random()*canvas.width;
     this.y=canvas.height;
-    this.targetY=Math.random()*canvas.height/2;
+    this.target=Math.random()*canvas.height/2;
     this.speed=Math.random()*3+4;
     this.exploded=false;
-    this.particles=[];
+    this.parts=[];
   }
   update(){
     if(!this.exploded){
       this.y-=this.speed;
-      if(this.y<=this.targetY){
+      if(this.y<=this.target){
         this.exploded=true;
-        for(let i=0;i<60;i++) this.particles.push(new Particle(this.x,this.y));
+        for(let i=0;i<60;i++) this.parts.push(new Particle(this.x,this.y));
       }
-    } else this.particles.forEach(p=>p.update());
+    } else this.parts.forEach(p=>p.update());
   }
   draw(){
     if(!this.exploded){
@@ -101,7 +154,7 @@ class Firework{
       ctx.beginPath();
       ctx.arc(this.x,this.y,2,0,Math.PI*2);
       ctx.fill();
-    } else this.particles.forEach(p=>p.draw());
+    } else this.parts.forEach(p=>p.draw());
   }
 }
 
@@ -132,25 +185,14 @@ let fireworks=[];
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   if(Math.random()<0.05) fireworks.push(new Firework());
-  fireworks.forEach((fw,i)=>{
-    fw.update();
-    fw.draw();
-    if(fw.exploded && fw.particles[0]?.alpha<=0) fireworks.splice(i,1);
+  fireworks.forEach((f,i)=>{
+    f.update();
+    f.draw();
+    if(f.exploded && f.parts[0]?.alpha<=0) fireworks.splice(i,1);
   });
   requestAnimationFrame(animate);
 }
 animate();
-
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.innerHTML="❤️";
-  heart.className="heart";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*3+5)+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),8000);
-}
-setInterval(createHeart,300);
 </script>
 
 </body>
