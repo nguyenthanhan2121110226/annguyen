@@ -1,208 +1,263 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Chúc Tết 2026 - Công Chúa Huyền Trâm</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧧 Chúc Tết 2026 🧧</title>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: radial-gradient(circle, #ffb3c6, #c9184a, #590d22);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
-    .envelope {
-      width: 92%;
-      max-width: 420px;
-      background: linear-gradient(145deg, #ffdde5, #fff0f5);
-      border-radius: 24px;
-      padding: 25px;
-      text-align: center;
-      border: 5px solid #ffd6e0;
-      box-shadow: 0 0 40px rgba(255, 120, 160, 0.9);
-      position: relative;
-      animation: glow 2s infinite alternate;
-    }
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(circle at bottom,#8b0000,#2a0000);
+  font-family:'Quicksand',sans-serif;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
 
-    @keyframes glow {
-      from { box-shadow: 0 0 15px #ffb3c6; }
-      to   { box-shadow: 0 0 35px #ff4d6d; }
-    }
+.card{
+  width:92%;
+  max-width:430px;
+  background:linear-gradient(145deg,#ffebf0,#fff6f9);
+  border-radius:26px;
+  padding:20px;
+  text-align:center;
+  border:4px solid gold;
+  box-shadow:0 0 40px rgba(255,100,120,.9);
+  animation:glow 2s infinite alternate;
+  position:relative;
+}
 
-    h1 {
-      color: #c9184a;
-      margin-bottom: 15px;
-    }
+@keyframes glow{
+  from{box-shadow:0 0 15px gold;}
+  to{box-shadow:0 0 40px gold;}
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      margin: 10px 0;
-      font-size: 16px;
-      font-weight: bold;
-      background: linear-gradient(135deg,#ff4d6d,#ff85a1);
-      color: white;
-      cursor: pointer;
-      transition: 0.25s;
-    }
+h1{
+  font-family:'Pacifico',cursive;
+  color:#c10000;
+  margin:10px 0 15px;
+  text-shadow:0 0 10px #ff8080;
+}
 
-    button:hover {
-      transform: scale(1.05);
-    }
+.btn{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  margin:10px 0;
+  font-size:16px;
+  font-weight:bold;
+  background:linear-gradient(135deg,#ff4d4d,#ffb703);
+  color:white;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 0 15px rgba(255,100,0,.8);
+}
 
-    .content {
-      display: none;
-      margin-top: 15px;
-      animation: fade 0.5s ease;
-    }
+.btn:hover{transform:scale(1.05)}
 
-    @keyframes fade {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
+.content{
+  display:none;
+  margin-top:12px;
+  animation:fade .4s ease;
+}
 
-    .text {
-      background: rgba(255,255,255,0.85);
-      border-radius: 14px;
-      padding: 15px;
-      line-height: 1.6;
-      color: #7a102d;
-      font-weight: 500;
-    }
+@keyframes fade{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
 
-    .qr {
-      margin-top: 10px;
-    }
+.text{
+  background:rgba(255,255,255,.95);
+  border-radius:14px;
+  padding:15px;
+  line-height:1.6;
+  color:#7a0000;
+  font-weight:500;
+}
 
-    .qr img {
-      width: 200px;
-      border-radius: 12px;
-      border: 4px solid #ffb3c6;
-    }
+.lixi{
+  width:120px;
+  margin:10px auto;
+  animation:shake 1.5s infinite;
+}
 
-    audio { display: none; }
+@keyframes shake{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(2deg)}
+  50%{transform:rotate(0)}
+  75%{transform:rotate(-2deg)}
+}
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    }
-  </style>
+.qr img{
+  width:200px;
+  border-radius:12px;
+  border:4px solid gold;
+}
+
+.musicBtn{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#ff3b3b;
+  border:none;
+  color:white;
+  font-size:24px;
+  box-shadow:0 0 15px gold;
+}
+
+.fall{
+  position:fixed;
+  top:-20px;
+  animation:fall linear infinite;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+}
+</style>
 </head>
+
 <body>
 
 <canvas id="fireworks"></canvas>
 
-<div class="envelope">
+<div class="card">
   <h1>🧧 Chúc Tết 2026 🧧</h1>
 
-  <button onclick="toggleWish()">💌 Mở lời chúc</button>
-  <button onclick="toggleLucky()">🎁 Mở lì xì</button>
+  <button class="btn" onclick="openWish()">💌 Mở lời chúc</button>
+  <button class="btn" onclick="openLucky()">🎁 Mở lì xì</button>
 
   <div id="wish" class="content">
     <div class="text">
-      Happy new years ! <br><br>
-      Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, luôn luôn khoẻ mạnh và phát lộc, phát tài. <br><br>
-      Chúc riêng em luôn vui vẻ, hạnh phúc bên gia đình và bạn bè. <br><br>
-      Chúc em luôn khoẻ, trẻ, xinh, đẹp và đạt được kết quả tốt trong năm học sắp tới. <br><br>
-      Chúc những điều tốt lành sẽ đến với em. <br><br>
-      “ Chúc em tất cả, trừ vất vả “ ❤️
+      Happy new year 💖<br><br>
+      Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, khoẻ mạnh và phát lộc phát tài.<br><br>
+      Chúc riêng em luôn vui vẻ, hạnh phúc và đạt nhiều thành công trong năm mới.<br><br>
+      “ Chúc em tất cả, trừ vất vả ” ✨
     </div>
   </div>
 
   <div id="lucky" class="content">
     <div class="text">
-      🍀 Chúc bạn may mắn 🍀 <br><br>
+      🍀 Chúc bạn may mắn 🍀 <br>
       Đây là túi lộc đầu năm anh gửi đến em ^^
     </div>
+
     <div class="qr">
-      <!-- Thay link QR của bạn vào đây -->
-      <img src="./IMG_2758.jpeg" class="lixiImg">
+      <img src="./IMG_2758.jpeg">
     </div>
+
     <a href="https://momo.vn" target="_blank">
-      <button style="margin-top:12px;background:linear-gradient(135deg,#ff758f,#ff4d6d)">
-      🎉 Nhận lì xì 🎉
-      </button>
+      <button class="btn">🎉 Nhận lì xì 🎉</button>
     </a>
   </div>
 </div>
 
-<!-- Nhạc nền -->
-<audio id="music" autoplay loop>
+<button class="musicBtn" onclick="toggleMusic()">🎵</button>
+
+<audio id="music" loop>
   <source src="./music/tet.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  const music = document.getElementById('music');
-  document.body.addEventListener('click', () => {
-    music.play();
-  });
+const music = document.getElementById('music');
 
-  function toggleWish(){
-    document.getElementById('wish').style.display = 'block';
-    document.getElementById('lucky').style.display = 'none';
-  }
+document.body.addEventListener('click',()=>{
+  music.play().catch(()=>{})
+});
 
-  function toggleLucky(){
-    document.getElementById('lucky').style.display = 'block';
-    document.getElementById('wish').style.display = 'none';
-  }
+function openWish(){
+  document.getElementById('wish').style.display="block";
+  document.getElementById('lucky').style.display="none";
+  startRain();
+}
 
-  // PHÁO HOA
-  const canvas = document.getElementById("fireworks");
-  const ctx = canvas.getContext("2d");
+function openLucky(){
+  document.getElementById('lucky').style.display="block";
+  document.getElementById('wish').style.display="none";
+  startRain();
+}
 
-  function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.onresize = resize;
+function toggleMusic(){
+  music.paused ? music.play() : music.pause();
+}
 
-  let particles=[];
+/* Mưa lì xì */
+function startRain(){
+  setInterval(()=>{
+    const el=document.createElement("div");
+    el.className="fall";
+    el.innerHTML=["🧧","💰","✨","🌸","❤️"][Math.floor(Math.random()*5)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.fontSize=18+Math.random()*22+"px";
+    el.style.animationDuration=4+Math.random()*6+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),10000);
+  },180);
+}
 
-  function fireworks(){
-    for(let i=0;i<4;i++){
-      particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height/2,
-        r:Math.random()*3+2,
-        dx:(Math.random()-0.5)*6,
-        dy:(Math.random()-0.5)*6,
-        life:80
-      });
-    }
-  }
+/* Pháo hoa */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+function resize(){
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
+}
+resize(); onresize=resize;
 
-  function draw(){
-    ctx.fillStyle="rgba(0,0,0,0.2)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+let particles=[];
 
-    particles.forEach((p,i)=>{
-      ctx.beginPath();
-      ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fill();
-      p.x+=p.dx;
-      p.y+=p.dy;
-      p.life--;
-      if(p.life<=0) particles.splice(i,1);
+function boom(){
+  for(let i=0;i<6;i++){
+    particles.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height/2,
+      r:Math.random()*3+2,
+      dx:(Math.random()-0.5)*6,
+      dy:(Math.random()-0.5)*6,
+      life:80
     });
-
-    requestAnimationFrame(draw);
   }
+}
 
-  setInterval(fireworks,700);
-  draw();
+function draw(){
+  ctx.fillStyle="rgba(0,0,0,.15)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    ctx.beginPath();
+    ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.x+=p.dx;
+    p.y+=p.dy;
+    p.life--;
+    if(p.life<=0) particles.splice(i,1);
+  });
+  requestAnimationFrame(draw);
+}
+
+setInterval(boom,700);
+draw();
 </script>
 
 </body>
