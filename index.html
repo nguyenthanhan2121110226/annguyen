@@ -17,12 +17,6 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  animation: bgMove 6s ease infinite alternate;
-}
-
-@keyframes bgMove {
-  from { filter: brightness(1); }
-  to   { filter: brightness(1.08); }
 }
 
 .envelope {
@@ -44,7 +38,8 @@ body {
 }
 
 h1 {
-  font-size: 28px;
+  font-family:'Pacifico',cursive;
+  font-size: 30px;
   color: #d1004f;
   margin-bottom: 15px;
   text-shadow: 0 0 12px rgba(255,80,120,0.9);
@@ -72,11 +67,11 @@ button:hover {
 .content {
   display: none;
   margin-top: 18px;
-  animation: fade 0.5s ease;
+  animation: fade .4s ease;
 }
 
 @keyframes fade {
-  from { opacity: 0; transform: scale(0.92); }
+  from { opacity: 0; transform: scale(.95); }
   to   { opacity: 1; transform: scale(1); }
 }
 
@@ -87,11 +82,10 @@ button:hover {
   line-height: 1.7;
   color: #8b0037;
   font-weight: 500;
-  box-shadow: inset 0 0 10px rgba(255,100,150,.5);
 }
 
 .qr img {
-  width: 240px;
+  width: 260px;
   border-radius: 18px;
   border: 5px solid #ff4d6d;
   box-shadow: 0 0 25px rgba(255,100,150,.9);
@@ -113,6 +107,7 @@ button:hover {
   align-items:center;
   justify-content:center;
 }
+
 .fall{
   position:fixed;
   top:-20px;
@@ -140,11 +135,11 @@ canvas{
 
 <canvas id="fireworks"></canvas>
 
-<div class="card">
+<div class="envelope">
   <h1>🧧 Chúc Tết 2026 🧧</h1>
 
-  <button class="btn" onclick="openWish()">💌 Mở lời chúc</button>
-  <button class="btn" onclick="openLucky()">🎁 Mở lì xì</button>
+  <button onclick="openWish()">💌 Mở lời chúc</button>
+  <button onclick="openLucky()">🎁 Mở lì xì</button>
 
   <div id="wish" class="content">
     <div class="text">
@@ -166,7 +161,7 @@ canvas{
     </div>
 
     <a href="https://lixi.momo.vn/lixi/QYwxlG1Omremw2l" target="_blank">
-      <button class="btn">🎉 Nhận lì xì 🎉</button>
+      <button>🎉 Nhận lì xì 🎉</button>
     </a>
   </div>
 </div>
@@ -200,23 +195,24 @@ function toggleMusic(){
   music.paused ? music.play() : music.pause();
 }
 
-/* Mưa lì xì */
+/* Mưa lì xì nhẹ */
 function startRain(){
   setInterval(()=>{
     const el=document.createElement("div");
     el.className="fall";
     el.innerHTML=["🧧","💖","🌸","✨","💰"][Math.floor(Math.random()*5)];
     el.style.left=Math.random()*100+"vw";
-    el.style.fontSize=18+Math.random()*16+"px";
-    el.style.animationDuration=7+Math.random()*5+"s";
+    el.style.fontSize=18+Math.random()*14+"px";
+    el.style.animationDuration=8+Math.random()*6+"s";
     document.body.appendChild(el);
-    setTimeout(()=>el.remove(),13000);
-  },450);   // ← Từ 200ms → 450ms (giảm gần 60%)
+    setTimeout(()=>el.remove(),14000);
+  },500);
 }
 
-/* Pháo hoa */
+/* Pháo hoa nền nhẹ */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
+
 function resize(){
   canvas.width=innerWidth;
   canvas.height=innerHeight;
@@ -226,21 +222,20 @@ resize(); onresize=resize;
 let particles=[];
 
 function boom(){
-  for(let i=0;i<6;i++){
+  for(let i=0;i<4;i++){
     particles.push({
       x:Math.random()*canvas.width,
       y:Math.random()*canvas.height/2,
       r:Math.random()*3+2,
-      dx:(Math.random()-0.5)*6,
-      dy:(Math.random()-0.5)*6,
-      life:80
+      dx:(Math.random()-0.5)*5,
+      dy:(Math.random()-0.5)*5,
+      life:70
     });
   }
 }
 
 function draw(){
-  ctx.fillStyle="rgba(0,0,0,.15)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach((p,i)=>{
     ctx.beginPath();
     ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
@@ -254,7 +249,7 @@ function draw(){
   requestAnimationFrame(draw);
 }
 
-setInterval(boom,700);
+setInterval(boom,800);
 draw();
 </script>
 
