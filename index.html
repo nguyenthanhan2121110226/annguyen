@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎁 Quà Tết 2026 - Công Chúa Huyền Trâm</title>
+<title>🎆 Chúc Mừng Năm Mới 2026 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
@@ -17,21 +16,21 @@ body{
   text-align:center;
   color:white;
 }
-canvas{position:fixed;inset:0;}
+canvas{position:fixed;inset:0}
 
 #start{
   position:fixed;
   inset:0;
   background:linear-gradient(135deg,#ff6ec4,#7873f5);
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
   z-index:100;
   cursor:pointer;
 }
 #start h1{
-  font-size:2.6em;
+  font-size:2.5em;
   animation:pulse 1.5s infinite;
 }
 @keyframes pulse{
@@ -56,11 +55,11 @@ h2{
   text-shadow:0 0 20px gold,0 0 50px red;
 }
 
-#typing p{
+#typing{
   font-size:1.5em;
   color:#ffb6c1;
   text-shadow:0 0 10px hotpink;
-  min-height:32px;
+  min-height:140px;
 }
 
 .heart,.flower{
@@ -81,7 +80,7 @@ h2{
 
 <div id="start">
   <h1>🎁 Nhấn để mở quà Tết 2026 🎆</h1>
-  <p>(Công Chúa Huyền Trâm)</p>
+  <p>Công Chúa Huyền Trâm 💖</p>
 </div>
 
 <canvas id="fireworks"></canvas>
@@ -100,33 +99,34 @@ document.getElementById("start").onclick=()=>{
   document.getElementById("start").style.display="none";
   document.getElementById("music").play();
   typeText();
-}
+};
 
 const lines=[
   "Gửi đến 💖 Công Chúa Huyền Trâm 💖",
-  "Chúc em một năm mới ngập tràn yêu thương ✨",
-  "Luôn xinh đẹp – hạnh phúc – bình an 🌸",
-  "Mọi ước mơ đều thành hiện thực 💫",
-  "Luôn có người thương em thật nhiều ❤️"
+  "Chúc em một năm mới tràn đầy yêu thương ✨",
+  "Luôn xinh đẹp, hạnh phúc và bình an 🌸",
+  "Mọi điều ước đều thành hiện thực 💫",
+  "Luôn có người quan tâm và thương em thật nhiều ❤️"
 ];
 
-let l=0,c=0;
+let i=0,j=0;
 const box=document.getElementById("typing");
 
 function typeText(){
-  if(l<lines.length){
-    if(c<lines[l].length){
-      box.innerHTML+=lines[l][c++];
+  if(i<lines.length){
+    if(j<lines[i].length){
+      box.innerHTML+=lines[i][j++];
       setTimeout(typeText,45);
-    }else{
+    } else {
       box.innerHTML+="<br>";
-      c=0;
-      l++;
+      j=0;
+      i++;
       setTimeout(typeText,600);
     }
   }
 }
 
+// Heart + flower
 function spawn(cls,emoji,time,min,max){
   const e=document.createElement("div");
   e.className=cls;
@@ -136,9 +136,8 @@ function spawn(cls,emoji,time,min,max){
   document.body.appendChild(e);
   setTimeout(()=>e.remove(),time);
 }
-
 setInterval(()=>spawn("heart","❤️",8000,5,9),300);
-setInterval(()=>spawn("flower","🌸",12000,7,12),600);
+setInterval(()=>spawn("flower","🌸",12000,7,12),700);
 
 // Fireworks
 const canvas=document.getElementById("fireworks");
@@ -202,7 +201,8 @@ function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   if(Math.random()<0.06) fireworks.push(new Firework());
   fireworks.forEach((f,i)=>{
-    f.update(); f.draw();
+    f.update();
+    f.draw();
     if(f.exploded && f.parts[0]?.alpha<=0) fireworks.splice(i,1);
   });
   requestAnimationFrame(animate);
