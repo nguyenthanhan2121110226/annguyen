@@ -10,7 +10,7 @@
 <style>
 body{
   margin:0;
-  background:radial-gradient(circle at bottom,#020111,#000);
+  background:radial-gradient(circle at bottom,#160202,#000);
   font-family:'Pacifico',cursive;
   overflow:hidden;
   text-align:center;
@@ -21,7 +21,7 @@ canvas{position:fixed;inset:0}
 #start{
   position:fixed;
   inset:0;
-  background:linear-gradient(135deg,#ff6ec4,#7873f5);
+  background:linear-gradient(135deg,#ff6b6b,#ffb6c1);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -31,6 +31,8 @@ canvas{position:fixed;inset:0}
 }
 #start h1{
   font-size:2.5em;
+  color:#fff;
+  text-shadow:0 0 10px red;
   animation:pulse 1.5s infinite;
 }
 @keyframes pulse{
@@ -39,26 +41,33 @@ canvas{position:fixed;inset:0}
   100%{transform:scale(1)}
 }
 
-.container{
+.frame{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:100%;
-  padding:20px;
+  width:90%;
+  max-width:520px;
+  padding:22px;
+  border-radius:20px;
+  background:rgba(0,0,0,.45);
+  border:3px solid rgba(255,182,193,.9);
+  box-shadow:0 0 30px rgba(255,105,135,.8);
   z-index:10;
 }
 
 h2{
-  font-size:3em;
-  color:#ffd700;
-  text-shadow:0 0 20px gold,0 0 50px red;
+  font-size:2.8em;
+  color:#ff3b3b;
+  -webkit-text-stroke:1px #ffb6c1;
+  text-shadow:0 0 12px rgba(255,120,150,.9);
 }
 
 #typing{
-  font-size:1.5em;
-  color:#ffb6c1;
-  text-shadow:0 0 10px hotpink;
+  font-size:1.4em;
+  color:#ffd1dc;
+  -webkit-text-stroke:0.6px #ff6f91;
+  text-shadow:0 0 10px rgba(255,140,170,.8);
   min-height:140px;
 }
 
@@ -66,8 +75,8 @@ h2{
   position:absolute;
   animation:fall linear infinite;
 }
-.heart{color:pink;font-size:20px}
-.flower{color:#ff9;font-size:22px}
+.heart{color:#ff7aa2;font-size:20px}
+.flower{color:#ffd1dc;font-size:22px}
 
 @keyframes fall{
   from{transform:translateY(-10vh);opacity:1}
@@ -89,7 +98,7 @@ h2{
   <source src="https://cdn.pixabay.com/audio/2023/12/20/audio_9b7fbc1c91.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
+<div class="frame">
   <h2>🎆 Chúc Mừng Năm Mới 2026 🎆</h2>
   <div id="typing"></div>
 </div>
@@ -106,7 +115,7 @@ const lines=[
   "Chúc em một năm mới tràn đầy yêu thương ✨",
   "Luôn xinh đẹp, hạnh phúc và bình an 🌸",
   "Mọi điều ước đều thành hiện thực 💫",
-  "Luôn có người quan tâm và thương em thật nhiều ❤️"
+  "Luôn mỉm cười và được yêu thương thật nhiều ❤️"
 ];
 
 let i=0,j=0;
@@ -126,7 +135,7 @@ function typeText(){
   }
 }
 
-// Heart + flower
+// Hearts + flowers
 function spawn(cls,emoji,time,min,max){
   const e=document.createElement("div");
   e.className=cls;
@@ -165,7 +174,7 @@ class Firework{
   }
   draw(){
     if(!this.exploded){
-      ctx.fillStyle="gold";
+      ctx.fillStyle="#ffd700";
       ctx.beginPath();
       ctx.arc(this.x,this.y,2,0,Math.PI*2);
       ctx.fill();
@@ -179,7 +188,7 @@ class Particle{
     this.vx=(Math.random()-0.5)*9;
     this.vy=(Math.random()-0.5)*9;
     this.alpha=1;
-    this.color=`hsl(${Math.random()*360},100%,60%)`;
+    this.color=`hsl(${Math.random()*360},100%,65%)`;
   }
   update(){
     this.x+=this.vx;
@@ -201,8 +210,7 @@ function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   if(Math.random()<0.06) fireworks.push(new Firework());
   fireworks.forEach((f,i)=>{
-    f.update();
-    f.draw();
+    f.update(); f.draw();
     if(f.exploded && f.parts[0]?.alpha<=0) fireworks.splice(i,1);
   });
   requestAnimationFrame(animate);
