@@ -1,147 +1,173 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎆 Chúc Mừng Năm Mới 2026 💖</title>
+  <meta charset="UTF-8" />
+  <title>Chúc Mừng Năm Mới 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #ffdde1, #ee9ca7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      overflow: hidden;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    .frame {
+      background: rgba(255, 255, 255, 0.9);
+      border: 3px solid #ff4d6d;
+      border-radius: 20px;
+      padding: 28px 24px 36px;
+      max-width: 720px;
+      width: 92%;
+      box-shadow: 0 0 25px rgba(255, 0, 70, 0.25);
+      animation: fadeIn 1.5s ease;
+      position: relative;
+    }
 
-<style>
-body{
-  margin:0;
-  background:radial-gradient(circle at bottom,#160202,#000);
-  font-family:'Pacifico',cursive;
-  overflow:hidden;
-  text-align:center;
-  color:white;
-}
-canvas{position:fixed;inset:0}
+    .title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+      color: #d1003f;
+      text-shadow: 0 0 6px rgba(255, 80, 120, 0.5);
+      margin-bottom: 16px;
+    }
 
-#start{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#ff6b6b,#ffb6c1);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:100;
-  cursor:pointer;
-}
-#start h1{
-  font-size:2.5em;
-  color:#fff;
-  text-shadow:0 0 10px red;
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.1)}
-  100%{transform:scale(1)}
-}
+    .content {
+      color: #c4003b;
+      font-size: 17px;
+      line-height: 1.7;
+      white-space: pre-line;
+      border: 2px dashed #ff8fab;
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(255, 235, 240, 0.8);
+    }
 
-.frame{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:90%;
-  max-width:520px;
-  padding:22px;
-  border-radius:20px;
-  background:rgba(0,0,0,.45);
-  border:3px solid rgba(255,182,193,.9);
-  box-shadow:0 0 30px rgba(255,105,135,.8);
-  z-index:10;
-}
+    .highlight {
+      color: #ff004c;
+      font-weight: bold;
+      font-style: italic;
+      text-align: center;
+      display: block;
+      margin-top: 12px;
+      font-size: 18px;
+    }
 
-h2{
-  font-size:2.8em;
-  color:#ff3b3b;
-  -webkit-text-stroke:1px #ffb6c1;
-  text-shadow:0 0 12px rgba(255,120,150,.9);
-}
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      color: #a80034;
+      font-size: 14px;
+      opacity: 0.9;
+    }
 
-#typing{
-  font-size:1.4em;
-  color:#ffd1dc;
-  -webkit-text-stroke:0.6px #ff6f91;
-  text-shadow:0 0 10px rgba(255,140,170,.8);
-  min-height:140px;
-}
+    .music-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      padding: 10px 16px;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 10;
+    }
 
-.heart,.flower{
-  position:absolute;
-  animation:fall linear infinite;
-}
-.heart{color:#ff7aa2;font-size:20px}
-.flower{color:#ffd1dc;font-size:22px}
+    .music-btn:hover {
+      background: #d1003f;
+      transform: scale(1.05);
+    }
 
-@keyframes fall{
-  from{transform:translateY(-10vh);opacity:1}
-  to{transform:translateY(110vh);opacity:0}
-}
-</style>
+    .firework {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow:
+        0 0 6px #ff2d55,
+        0 0 12px #ff6f91,
+        0 0 18px #ffc1d6;
+      animation: explode 1.5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      80% { transform: scale(1.8); opacity: 0.8; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="start">
-  <h1>🎁 Nhấn để mở quà Tết 2026 🎆</h1>
-  <p>Công Chúa Huyền Trâm 💖</p>
-</div>
+  <div class="frame">
+    <div class="title">🎆 Happy New Year 2026 🎆</div>
 
-<canvas id="fireworks"></canvas>
+    <div class="content">
+Happy new years ! 
+Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, luôn luôn khoẻ mạnh và phát lộc, phát tài.
+Chúc riêng em luôn vui vẻ, hạnh phúc bên gia đình và bạn bè.
+Chúc em luôn khoẻ, trẻ, xinh, đẹp và đạt được kết quả tốt trong năm học sắp tới.
+Chúc những điều tốt lành sẽ đến với em.
 
-<audio id="music" preload="auto">
-  <source src="https://cdn.pixabay.com/audio/2023/12/20/audio_9b7fbc1c91.mp3" type="audio/mpeg">
-</audio>
+<span class="highlight">“ Chúc em tất cả, trừ vất vả “</span>
 
-<div class="frame">
-  <h2>🎆 Chúc Mừng Năm Mới 2026 🎆</h2>
-  <div id="typing"></div>
-</div>
+Và đây cũng là túi lộc đầu năm anh muốn gửi đến em^^
+Chúc em may mắn !
+    </div>
 
-<script>
-const music = document.getElementById("music");
+    <div class="footer">
+      💖 2026 – Một năm thật rực rỡ nhé 💖
+    </div>
+  </div>
 
-document.getElementById("start").addEventListener("click", async () => {
-  document.getElementById("start").style.display = "none";
-  try {
-    await music.play();   // FIX iOS autoplay
-  } catch(e){}
-  typeText();
-});
+  <button class="music-btn" onclick="toggleMusic()">🎵 Bật / Tắt nhạc</button>
 
-const lines=[
-  "Happy new years !"
-"Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, luôn luôn khoẻ mạnh và phát lộc, phát tài."
-"Chúc riêng em luôn vui vẻ, hạnh phúc bên gia đình và bạn bè."
-"Chúc 💖em luôn khoẻ, trẻ, xinh, đẹp và đạt được kết quả tốt trong năm học sắp tới."
-"Chúc những điều tốt lành sẽ đến với em."
-"“ Chúc em tất cả, trừ vất vả🌸“"
-"Và đây cũng là túi lộc đầu năm anh muốn gửi đến em^^"
-"Chúc em may mắn !"
-];
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/12/21/audio_68c03e94e7.mp3" type="audio/mpeg">
+  </audio>
 
-let i=0,j=0;
-const box=document.getElementById("typing");
+  <script>
+    const music = document.getElementById("bgm");
 
-function typeText(){
-  if(i<lines.length){
-    if(j<lines[i].length){
-      box.innerHTML+=lines[i][j++];
-      setTimeout(typeText,45);
-    } else {
-      box.innerHTML+="<br>";
-      j=0;
-      i++;
-      setTimeout(typeText,600);
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
     }
-  }
-}
-</script>
+
+    document.body.addEventListener("click", () => {
+      if (music.paused) music.play();
+    }, { once: true });
+
+    function createFirework() {
+      const f = document.createElement("div");
+      f.className = "firework";
+      f.style.left = Math.random() * window.innerWidth + "px";
+      f.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(f);
+      setTimeout(() => f.remove(), 1500);
+    }
+
+    setInterval(createFirework, 500);
+  </script>
 
 </body>
 </html>
