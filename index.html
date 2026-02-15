@@ -82,13 +82,24 @@ button:hover{
 .text{
   background:linear-gradient(135deg,#fff0f5,#ffe6ee);
   border-radius:18px;
-  padding:16px;
-  line-height:1.7;
+  padding:16px 16px;
+  line-height:1.65;
   color:#8b0037;
   font-weight:500;
+  max-height:45vh;   /* giới hạn chiều cao */
+  overflow-y:auto;   /* bật scroll */
   box-shadow: inset 0 0 10px rgba(255,100,150,.3);
+  scrollbar-width: thin;
 }
 
+/* Scroll đẹp */
+.text::-webkit-scrollbar{
+  width:6px;
+}
+.text::-webkit-scrollbar-thumb{
+  background:linear-gradient(#ff4d6d,#ff9f43);
+  border-radius:10px;
+}
 .qr img{
   width:230px;
   margin:14px 0;
@@ -178,7 +189,9 @@ canvas{
     <div class="text">
       Happy new year 💖<br><br>
       Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, khoẻ mạnh và phát lộc phát tài.<br><br>
-      Chúc riêng em luôn vui vẻ, hạnh phúc và đạt nhiều thành công trong năm mới.<br><br>
+      Chúc riêng em luôn vui vẻ, hạnh phúc bên gia đình và bạn bè. <br><br>
+      Chúc em luôn khoẻ, trẻ, xinh, đẹp và đạt được kết quả tốt trong năm học sắp tới. <br><br>
+      Chúc những điều tốt lành sẽ đến với em. <br><br>
       “ Chúc em tất cả, trừ vất vả ” ✨
     </div>
   </div>
