@@ -183,7 +183,7 @@ canvas{
   </div>
 </div>
 
-<button class="musicBtn" onclick="toggleMusic()">🎵</button>
+<button class="musicBtn" id="musicBtn">🎵</button>
 
 <audio id="music" loop>
   <source src="./music/tet.mp3.mp3" type="audio/mpeg">
@@ -191,10 +191,6 @@ canvas{
 
 <script>
 const music = document.getElementById('music');
-
-document.body.addEventListener('click',()=>{
-  music.play().catch(()=>{})
-});
 
 function openWish(){
   document.getElementById('wish').style.display="block";
@@ -208,9 +204,30 @@ function openLucky(){
   startRain();
 }
 
-function toggleMusic(){
-  music.paused ? music.play() : music.pause();
-}
+const musicBtn = document.getElementById('musicBtn');
+let isPlaying = false;
+
+musicBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  if (isPlaying) {
+    music.pause();
+    musicBtn.innerHTML = "🔇";
+  } else {
+    music.play().catch(()=>{});
+    musicBtn.innerHTML = "🎵";
+  }
+
+  isPlaying = !isPlaying;
+});
+
+// autoplay khi user chạm lần đầu
+document.body.addEventListener('click', () => {
+  if (!isPlaying) {
+    music.play().catch(()=>{});
+    isPlaying = true;
+  }
+}, { once: true });
 
 /* Mưa lì xì nhẹ */
 function startRain(){
