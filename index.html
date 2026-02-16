@@ -289,19 +289,19 @@ const lucky=document.getElementById("lucky");
 const spinBox=document.getElementById("spinBox");
 const modal=document.getElementById("modal");
 
-let trollCount = 0;
-let trolling = false;
+let trollCount=0;
+let trolling=false;
 
-const trollText = [
+const trollText=[
   "Bạn chắc chắn muốn nhận lì xì không 😏",
   "Khoan đã... suy nghĩ kỹ chưa 🤔",
-  "Ấn lại phát nữa cho chắc 😝",
-  "Kiên nhẫn ghê ha 😆",
+  "Ấn thêm phát nữa cho chắc 😝",
+  "Ủa vẫn chưa bỏ cuộc à 😆",
   "✨ Thêm tí nữa ✨",
   "Hệ thống đang xin vía 🧿",
   "Đang gọi lộc về 📞",
-  "Server đang xử lý 🖥️",
-  "Sắp xong rồi đó 😈"
+  "Server rung rung rồi 🖥️",
+  "Ok ok... lần cuối 😈"
 ];
 
 function openWish(){
@@ -313,40 +313,72 @@ function openWish(){
 
 function openLucky(){
   if(trolling) return;
-  trolling = true;
-  trollCount = 0;
-  trollLoop();
+  trolling=true;
+  trollCount=0;
+  showTroll();
 }
 
-function trollLoop(){
-  if(trollCount < 9){
-    showTrollModal(trollText[trollCount]);
-    trollCount++;
-  } else {
-    trolling = false;
-    closeTroll();
-    lucky.style.display="block";
-    wish.style.display="none";
-    startRain();
-    boom();
-  }
-}
-
-function showTrollModal(text){
-  modal.innerHTML = `
-    <div class="modalBox" style="transform:translate(${rand(-120,120)}px,${rand(-120,120)}px)">
-      <h3>${text}</h3>
-      <div style="margin-top:18px;display:flex;justify-content:space-around">
-        <button onclick="trollLoop()">YES</button>
-        <button onclick="closeTroll()">NO</button>
+function showTroll(){
+  modal.style.display="flex";
+  modal.innerHTML=`
+    <div class="modalBox trollBox">
+      <h3>${trollText[trollCount]}</h3>
+      <div style="margin-top:18px;display:flex;justify-content:space-around;gap:15px">
+        <button id="yesBtn">YES</button>
+        <button id="noBtn">NO</button>
       </div>
     </div>
   `;
-  modal.style.display="flex";
+
+  const box=document.querySelector(".trollBox");
+  box.style.transform=`translate(${rand(-120,120)}px,${rand(-120,120)}px)`;
+
+  const yes=document.getElementById("yesBtn");
+  const no=document.getElementById("noBtn");
+
+  // Nút YES né ở mấy vòng đầu
+  if(trollCount<5){
+    yes.onmouseenter=()=>{
+      yes.style.position="relative";
+      yes.style.left=rand(-80,80)+"px";
+      yes.style.top=rand(-50,50)+"px";
+    }
+  }
+
+  yes.onclick=()=>{
+    trollCount++;
+    if(trollCount<9){
+      shake(box);
+      showTroll();
+    }else{
+      trolling=false;
+      closeTroll();
+      lucky.style.display="block";
+      wish.style.display="none";
+      startRain();
+      boom();
+    }
+  }
+
+  no.onclick=()=>{
+    trollCount++;
+    shake(box);
+    showTroll();
+  }
 }
 
 function closeTroll(){
   modal.style.display="none";
+}
+
+/* SHAKE EFFECT */
+function shake(el){
+  el.animate([
+    {transform:"translate(0,0)"},
+    {transform:"translate(-10px,0)"},
+    {transform:"translate(10px,0)"},
+    {transform:"translate(0,0)"}
+  ],{duration:300});
 }
 
 /* SPIN */
@@ -362,7 +394,7 @@ function spin(){
 }
 
 function showQR(){
-  modal.innerHTML = `
+  modal.innerHTML=`
     <div class="modalBox">
       <h3>🎉 Nhận lì xì 🎉</h3>
       <img src="./IMG_2758.jpeg">
@@ -376,9 +408,7 @@ function showQR(){
 }
 
 /* RANDOM */
-function rand(min,max){
-  return Math.random()*(max-min)+min;
-}
+function rand(min,max){ return Math.random()*(max-min)+min; }
 
 /* MUSIC */
 const music=document.getElementById("music");
@@ -435,14 +465,14 @@ resize(); onresize=resize;
 let particles=[];
 
 function boom(){
-  for(let i=0;i<24;i++){
+  for(let i=0;i<26;i++){
     particles.push({
       x:Math.random()*canvas.width,
       y:Math.random()*canvas.height/2,
       r:Math.random()*3+2,
       dx:(Math.random()-0.5)*6,
       dy:(Math.random()-0.5)*6,
-      life:100
+      life:110
     });
   }
 }
