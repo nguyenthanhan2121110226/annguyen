@@ -284,15 +284,15 @@ canvas{
 </audio>
 
 <script>
-const wish=document.getElementById("wish");
-const lucky=document.getElementById("lucky");
-const spinBox=document.getElementById("spinBox");
-const modal=document.getElementById("modal");
+const wish = document.getElementById("wish");
+const lucky = document.getElementById("lucky");
+const spinBox = document.getElementById("spinBox");
+const modal = document.getElementById("modal");
 
-let trollCount=0;
-let trolling=false;
+let trollCount = 0;
+let trolling = false;
 
-const trollText=[
+const trollText = [
   "Bạn chắc chắn muốn nhận lì xì không 😏",
   "Khoan đã... suy nghĩ kỹ chưa 🤔",
   "Ấn thêm phát nữa cho chắc 😝",
@@ -313,57 +313,54 @@ function openWish(){
 
 function openLucky(){
   if(trolling) return;
-  trolling=true;
-  trollCount=0;
+  trolling = true;
+  trollCount = 0;
   showTroll();
 }
 
+/* ===== TROLL CORE ===== */
 function showTroll(){
-  modal.style.display="flex";
-  modal.innerHTML=`
-    <div class="modalBox trollBox">
-      <h3>${trollText[trollCount]}</h3>
-      <div style="margin-top:18px;display:flex;justify-content:space-around;gap:15px">
-        <button id="yesBtn">YES</button>
-        <button id="noBtn">NO</button>
-      </div>
+  modal.style.display = "flex";
+  modal.innerHTML = "";
+
+  const box = document.createElement("div");
+  box.className = "modalBox trollBox";
+  box.innerHTML = `
+    <h3>${trollText[trollCount]}</h3>
+    <div style="margin-top:18px;display:flex;justify-content:space-around;gap:15px">
+      <button id="yesBtn">YES</button>
+      <button id="noBtn">NO</button>
     </div>
   `;
 
-  const box=document.querySelector(".trollBox");
-  box.style.transform=`translate(${rand(-120,120)}px,${rand(-120,120)}px)`;
+  box.style.transform = `translate(${rand(-120,120)}px,${rand(-120,120)}px)`;
+  modal.appendChild(box);
 
-  const yes=document.getElementById("yesBtn");
-  const no=document.getElementById("noBtn");
+  const yes = document.getElementById("yesBtn");
+  const no = document.getElementById("noBtn");
 
-  // Nút YES né ở mấy vòng đầu
-  if(trollCount<5){
-    yes.onmouseenter=()=>{
-      yes.style.position="relative";
-      yes.style.left=rand(-80,80)+"px";
-      yes.style.top=rand(-50,50)+"px";
-    }
+  if(trollCount < 5){
+    yes.onmouseenter = () => dodge(yes);
+  } else {
+    yes.onmouseenter = null;
   }
 
-  yes.onclick=()=>{
-    trollCount++;
-    if(trollCount<9){
-      shake(box);
-      showTroll();
-    }else{
-      trolling=false;
-      closeTroll();
-      lucky.style.display="block";
-      wish.style.display="none";
-      startRain();
-      boom();
-    }
-  }
+  yes.onclick = () => nextStep();
+  no.onclick = () => nextStep();
+}
 
-  no.onclick=()=>{
-    trollCount++;
-    shake(box);
+function nextStep(){
+  trollCount++;
+  if(trollCount < 9){
     showTroll();
+    shake(document.querySelector(".trollBox"));
+  } else {
+    trolling = false;
+    closeTroll();
+    lucky.style.display="block";
+    wish.style.display="none";
+    startRain();
+    boom();
   }
 }
 
@@ -371,17 +368,27 @@ function closeTroll(){
   modal.style.display="none";
 }
 
-/* SHAKE EFFECT */
+/* ===== FUN EFFECT ===== */
+function dodge(el){
+  el.style.position = "relative";
+  el.style.left = rand(-80,80)+"px";
+  el.style.top = rand(-50,50)+"px";
+}
+
 function shake(el){
   el.animate([
     {transform:"translate(0,0)"},
-    {transform:"translate(-10px,0)"},
-    {transform:"translate(10px,0)"},
+    {transform:"translate(-12px,0)"},
+    {transform:"translate(12px,0)"},
     {transform:"translate(0,0)"}
   ],{duration:300});
 }
 
-/* SPIN */
+function rand(min,max){
+  return Math.random()*(max-min)+min;
+}
+
+/* ===== SPIN ===== */
 function spin(){
   spinBox.classList.remove("spinAnim");
   void spinBox.offsetWidth;
@@ -394,6 +401,7 @@ function spin(){
 }
 
 function showQR(){
+  modal.style.display="flex";
   modal.innerHTML=`
     <div class="modalBox">
       <h3>🎉 Nhận lì xì 🎉</h3>
@@ -404,13 +412,9 @@ function showQR(){
       <button onclick="closeTroll()">Đóng</button>
     </div>
   `;
-  modal.style.display="flex";
 }
 
-/* RANDOM */
-function rand(min,max){ return Math.random()*(max-min)+min; }
-
-/* MUSIC */
+/* ===== MUSIC ===== */
 const music=document.getElementById("music");
 const musicBtn=document.getElementById("musicBtn");
 let started=false;
@@ -436,7 +440,7 @@ musicBtn.onclick=e=>{
   }
 };
 
-/* FALL */
+/* ===== FALL ===== */
 function startRain(){
   if(window.raining) return;
   window.raining=true;
@@ -452,7 +456,7 @@ function startRain(){
   },480);
 }
 
-/* FIREWORK */
+/* ===== FIREWORK ===== */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 
@@ -465,14 +469,14 @@ resize(); onresize=resize;
 let particles=[];
 
 function boom(){
-  for(let i=0;i<26;i++){
+  for(let i=0;i<28;i++){
     particles.push({
       x:Math.random()*canvas.width,
       y:Math.random()*canvas.height/2,
       r:Math.random()*3+2,
       dx:(Math.random()-0.5)*6,
       dy:(Math.random()-0.5)*6,
-      life:110
+      life:120
     });
   }
 }
