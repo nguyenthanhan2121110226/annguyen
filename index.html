@@ -289,6 +289,21 @@ const lucky=document.getElementById("lucky");
 const spinBox=document.getElementById("spinBox");
 const modal=document.getElementById("modal");
 
+let trollCount = 0;
+let trolling = false;
+
+const trollText = [
+  "Bạn chắc chắn muốn nhận lì xì không 😏",
+  "Khoan đã... suy nghĩ kỹ chưa 🤔",
+  "Ấn lại phát nữa cho chắc 😝",
+  "Kiên nhẫn ghê ha 😆",
+  "✨ Thêm tí nữa ✨",
+  "Hệ thống đang xin vía 🧿",
+  "Đang gọi lộc về 📞",
+  "Server đang xử lý 🖥️",
+  "Sắp xong rồi đó 😈"
+];
+
 function openWish(){
   wish.style.display="block";
   lucky.style.display="none";
@@ -297,10 +312,41 @@ function openWish(){
 }
 
 function openLucky(){
-  lucky.style.display="block";
-  wish.style.display="none";
-  startRain();
-  boom();
+  if(trolling) return;
+  trolling = true;
+  trollCount = 0;
+  trollLoop();
+}
+
+function trollLoop(){
+  if(trollCount < 9){
+    showTrollModal(trollText[trollCount]);
+    trollCount++;
+  } else {
+    trolling = false;
+    closeTroll();
+    lucky.style.display="block";
+    wish.style.display="none";
+    startRain();
+    boom();
+  }
+}
+
+function showTrollModal(text){
+  modal.innerHTML = `
+    <div class="modalBox" style="transform:translate(${rand(-120,120)}px,${rand(-120,120)}px)">
+      <h3>${text}</h3>
+      <div style="margin-top:18px;display:flex;justify-content:space-around">
+        <button onclick="trollLoop()">YES</button>
+        <button onclick="closeTroll()">NO</button>
+      </div>
+    </div>
+  `;
+  modal.style.display="flex";
+}
+
+function closeTroll(){
+  modal.style.display="none";
 }
 
 /* SPIN */
@@ -308,14 +354,30 @@ function spin(){
   spinBox.classList.remove("spinAnim");
   void spinBox.offsetWidth;
   spinBox.classList.add("spinAnim");
+
   setTimeout(()=>{
-    modal.style.display="flex";
+    showQR();
     boom();
   },3000);
 }
 
-function closeModal(){
-  modal.style.display="none";
+function showQR(){
+  modal.innerHTML = `
+    <div class="modalBox">
+      <h3>🎉 Nhận lì xì 🎉</h3>
+      <img src="./IMG_2758.jpeg">
+      <a href="https://lixi.momo.vn/lixi/QYwxlG1Omremw2l" target="_blank">
+        <button>💰 Nhận ngay 💰</button>
+      </a>
+      <button onclick="closeTroll()">Đóng</button>
+    </div>
+  `;
+  modal.style.display="flex";
+}
+
+/* RANDOM */
+function rand(min,max){
+  return Math.random()*(max-min)+min;
 }
 
 /* MUSIC */
@@ -357,7 +419,7 @@ function startRain(){
     el.style.animationDuration=8+Math.random()*6+"s";
     document.body.appendChild(el);
     setTimeout(()=>el.remove(),14000);
-  },500);
+  },480);
 }
 
 /* FIREWORK */
@@ -373,14 +435,14 @@ resize(); onresize=resize;
 let particles=[];
 
 function boom(){
-  for(let i=0;i<18;i++){
+  for(let i=0;i<24;i++){
     particles.push({
       x:Math.random()*canvas.width,
       y:Math.random()*canvas.height/2,
       r:Math.random()*3+2,
       dx:(Math.random()-0.5)*6,
       dy:(Math.random()-0.5)*6,
-      life:90
+      life:100
     });
   }
 }
