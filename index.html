@@ -11,17 +11,20 @@
 :root{
   --pink:#ff5fa2;
   --red:#e60026;
-  --gold:#ffcc33;
+  --gold:#ffd36a;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
 body{
   margin:0;
   min-height:100vh;
   background:
-    radial-gradient(circle at top,#ffd36a,transparent 40%),
-    linear-gradient(135deg,#ff6aa2,#d6002a);
+    radial-gradient(circle at top,#fff1b8,transparent 40%),
+    linear-gradient(135deg,#ff5f9e,#b8002a);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -29,15 +32,15 @@ body{
   font-family:'Quicksand',sans-serif;
 }
 
-/* BACKGROUND EFFECT */
+/* BACKGROUND */
 .bgLight{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 30%),
-    radial-gradient(circle at 80% 40%,rgba(255,255,255,.12),transparent 30%),
-    radial-gradient(circle at 50% 80%,rgba(255,215,120,.25),transparent 40%);
-  animation: shimmer 8s infinite alternate;
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.15),transparent 35%),
+    radial-gradient(circle at 80% 40%,rgba(255,255,255,.15),transparent 35%),
+    radial-gradient(circle at 50% 85%,rgba(255,215,120,.35),transparent 45%);
+  animation: shimmer 12s infinite alternate;
 }
 
 @keyframes shimmer{
@@ -47,48 +50,63 @@ body{
 
 .horse77{
   position:fixed;
-  font-size:140px;
-  opacity:.15;
-  animation: horseFloat 8s infinite ease-in-out;
+  font-size:180px;
+  opacity:.12;
+  filter:blur(.8px);
+  animation: horseFloat 12s infinite ease-in-out;
 }
 
 @keyframes horseFloat{
   0%,100%{transform:translateY(0) rotate(0)}
-  50%{transform:translateY(-18px) rotate(3deg)}
+  50%{transform:translateY(-35px) rotate(6deg)}
 }
 
 /* MAIN CARD */
 .envelope{
-  width:94%;
-  max-width:520px;
-  background:linear-gradient(145deg,#fff1f6,#ffe1ea);
-  border-radius:32px;
-  padding:28px 22px 32px;
+  width:92%;
+  max-width:540px;
+  background:linear-gradient(145deg,#fff7fb,#ffe1ec);
+  border-radius:40px;
+  padding:32px 24px 36px;
   text-align:center;
   border:4px solid var(--gold);
-  box-shadow:0 0 60px rgba(255,200,80,.9);
+  box-shadow:
+    0 0 80px rgba(255,210,120,.95),
+    inset 0 0 18px rgba(255,255,255,.45);
   position:relative;
-  animation:float 4s ease-in-out infinite;
-  backdrop-filter: blur(6px);
+  animation:float 6s ease-in-out infinite;
+  backdrop-filter: blur(14px);
+  perspective:1200px;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  50%{transform:translateY(-14px)}
+}
+
+.flipWrap{
+  transition:transform 1s cubic-bezier(.25,.8,.25,1);
+  transform-style:preserve-3d;
+}
+
+.flipWrap.flipped{
+  transform:rotateY(180deg);
 }
 
 h1{
   font-family:'Pacifico',cursive;
-  font-size:30px;
+  font-size:34px;
+  line-height:1.25;
   color:var(--red);
-  text-shadow:0 0 14px rgba(255,200,100,.9);
+  margin-bottom:20px;
+  text-shadow:0 0 22px rgba(255,190,100,1);
 }
 
 /* BUTTON */
 button{
   width:100%;
-  padding:15px;
-  border-radius:18px;
+  padding:16px 14px;
+  border-radius:22px;
   border:none;
   margin:12px 0;
   font-size:17px;
@@ -96,55 +114,54 @@ button{
   background:linear-gradient(135deg,var(--red),var(--gold));
   color:white;
   cursor:pointer;
-  transition:.35s;
-  box-shadow:0 0 20px rgba(255,180,60,.85);
+  transition:.35s cubic-bezier(.25,.8,.25,1);
+  box-shadow:0 0 24px rgba(255,180,60,.95);
 }
 
-button:hover{
-  transform:scale(1.06);
-  filter:brightness(1.1);
-}
+button:hover{transform:scale(1.07);filter:brightness(1.1)}
+button:active{transform:scale(.95)}
 
 /* CONTENT */
 .content{
   display:none;
-  margin-top:15px;
-  animation:cinema .6s cubic-bezier(.25,.8,.25,1);
+  margin-top:18px;
+  animation:cinema .8s cubic-bezier(.25,.8,.25,1);
 }
 
 @keyframes cinema{
-  from{opacity:0; transform:scale(.8) rotateX(15deg)}
-  to{opacity:1; transform:scale(1) rotateX(0)}
+  from{opacity:0; transform:perspective(800px) rotateX(18deg) scale(.85)}
+  to{opacity:1; transform:perspective(800px) rotateX(0) scale(1)}
 }
 
 .text{
-  background:linear-gradient(145deg,#fff7fa,#ffe7ef);
-  border-radius:18px;
-  padding:16px;
-  line-height:1.75;
+  background:linear-gradient(145deg,#fff9fc,#ffe6ef);
+  border-radius:22px;
+  padding:20px;
+  line-height:1.8;
+  font-size:15.8px;
   color:#8b002f;
-  max-height:45vh;
+  max-height:48vh;
   overflow-y:auto;
-  box-shadow: inset 0 0 18px rgba(255,120,160,.4);
+  box-shadow: inset 0 0 24px rgba(255,120,160,.35);
 }
 
 /* SPIN */
 .spinBox{
-  margin:20px auto;
-  width:200px;
-  height:200px;
+  margin:22px auto 14px;
+  width:210px;
+  height:210px;
   border-radius:50%;
-  border:8px solid var(--gold);
+  border:9px solid var(--gold);
   background:conic-gradient(var(--red),var(--pink),var(--gold),var(--red));
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:46px;
-  box-shadow:0 0 35px rgba(255,200,80,.9);
+  font-size:56px;
+  box-shadow:0 0 45px rgba(255,200,80,1);
 }
 
 .spinAnim{
-  animation:spin 3s cubic-bezier(.2,.7,.3,1) forwards;
+  animation:spin 3.5s cubic-bezier(.18,.75,.25,1) forwards;
 }
 
 @keyframes spin{
@@ -160,18 +177,19 @@ button:hover{
   align-items:center;
   justify-content:center;
   z-index:999;
+  backdrop-filter: blur(3px);
 }
 
 .modalBox{
-  background:linear-gradient(145deg,#fff0f6,#ffe1ea);
-  border-radius:24px;
-  padding:24px;
+  background:linear-gradient(145deg,#fff6fa,#ffe1ec);
+  border-radius:28px;
+  padding:26px 22px;
   width:85%;
-  max-width:340px;
+  max-width:360px;
   text-align:center;
   border:4px solid var(--gold);
-  box-shadow:0 0 40px rgba(255,200,80,.9);
-  animation:zoom .4s ease;
+  box-shadow:0 0 50px rgba(255,200,80,1);
+  animation:zoom .45s ease;
 }
 
 @keyframes zoom{
@@ -180,10 +198,11 @@ button:hover{
 }
 
 .modalBox img{
-  width:220px;
-  border-radius:16px;
+  width:230px;
+  border-radius:18px;
   border:4px solid var(--gold);
-  box-shadow:0 0 22px rgba(255,180,60,.9);
+  box-shadow:0 0 22px rgba(255,180,60,.95);
+  margin:12px 0;
 }
 
 /* MUSIC */
@@ -191,34 +210,35 @@ button:hover{
   position:fixed;
   bottom:18px;
   right:18px;
-  width:56px;
-  height:56px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   background:linear-gradient(135deg,var(--red),var(--gold));
   border:none;
   color:white;
-  font-size:24px;
+  font-size:26px;
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 0 22px rgba(255,200,80,.95);
+  box-shadow:0 0 28px rgba(255,200,80,1);
   cursor:pointer;
   z-index:9999;
 }
 
-.spinIcon{ animation:spin 3s linear infinite }
+.spinIcon{ animation:spin 4s linear infinite }
 
 /* FALL */
-.fall{
+.fall,.confetti{
   position:fixed;
   top:-20px;
   animation:fall linear infinite;
   pointer-events:none;
+  filter:drop-shadow(0 0 8px rgba(255,200,120,.75));
 }
 
 @keyframes fall{
   to{
-    transform:translateY(110vh) rotate(360deg);
+    transform:translateY(110vh) rotate(720deg);
     opacity:0;
   }
 }
@@ -228,6 +248,21 @@ canvas{
   inset:0;
   pointer-events:none;
 }
+
+/* Ripple */
+.ripple{
+  position:fixed;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.7);
+  animation:ripple .6s ease-out forwards;
+  pointer-events:none;
+}
+
+@keyframes ripple{
+  to{transform:scale(12);opacity:0;}
+}
 </style>
 </head>
 
@@ -235,47 +270,41 @@ canvas{
 
 <div class="bgLight"></div>
 <div class="horse77">🐎</div>
-
 <canvas id="fireworks"></canvas>
 
-<div class="envelope">
-  <h1>🧧 Chúc mừng năm Bính Ngọ 2026 🧧</h1>
+<div class="envelope glow">
+  <div class="flipWrap" id="flipWrap">
 
-  <button ondblclick="openWish()">💌 Ấn đúp mở lời chúc</button>
-  <button ondblclick="openLucky()">🎁 Ấn đúp mở lì xì</button>
+    <h1>🧧 Chúc mừng năm Bính Ngọ 2026 🧧</h1>
 
-  <div id="wish" class="content">
-    <div class="text">
-      Happy new year 💖<br><br>
-      Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, khoẻ mạnh và phát lộc phát tài.<br><br>
-      Chúc riêng em luôn vui vẻ, hạnh phúc bên gia đình và bạn bè. <br><br>
-      Chúc em luôn khoẻ, trẻ, xinh, đẹp và đạt được kết quả tốt trong năm học sắp tới. <br><br>
-      Chúc những điều tốt lành sẽ đến với em. <br><br>
-      “ Chúc em tất cả, trừ vất vả ” ✨
+    <button ondblclick="openWish()">💌 Ấn đúp mở lời chúc</button>
+    <button ondblclick="openLucky()">🎁 Ấn đúp mở lì xì</button>
+
+    <div id="wish" class="content">
+      <div class="text">
+        Happy new year 💖<br><br>
+        Một năm cũ đã qua, một năm mới lại đến. Anh chúc cho gia đình em luôn bình an, khoẻ mạnh và phát lộc phát tài.<br><br>
+        Chúc riêng em luôn vui vẻ, hạnh phúc bên gia đình và bạn bè.<br><br>
+        Chúc em luôn khoẻ, trẻ, xinh, đẹp và đạt được kết quả tốt trong năm học sắp tới.<br><br>
+        Chúc những điều tốt lành sẽ đến với em.<br><br>
+        “ Chúc em tất cả, trừ vất vả ” ✨
+      </div>
     </div>
-  </div>
 
-  <div id="lucky" class="content">
-    <div class="text">
-      🍀 Chúc bạn may mắn 🍀<br>
-      Quay vòng quay để nhận lộc đầu năm 💖
-      <div class="spinBox" id="spinBox">🧧</div>
-      <button onclick="spin()">🎉 Quay nhận lộc 🎉</button>
+    <div id="lucky" class="content">
+      <div class="text">
+        🍀 Chúc bạn may mắn 🍀<br>
+        Quay vòng quay để nhận lộc đầu năm 💖
+        <div class="spinBox" id="spinBox">🧧</div>
+        <button onclick="spin()">🎉 Quay nhận lộc 🎉</button>
+      </div>
     </div>
+
   </div>
 </div>
 
 <!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modalBox">
-    <h3>🎉 Nhận lì xì 🎉</h3>
-    <img src="./IMG_2758.jpeg">
-    <a href="https://lixi.momo.vn/lixi/QYwxlG1Omremw2l" target="_blank">
-      <button>💰 Nhận ngay 💰</button>
-    </a>
-    <button onclick="closeModal()">Đóng</button>
-  </div>
-</div>
+<div class="modal" id="modal"></div>
 
 <!-- MUSIC -->
 <button class="musicBtn" id="musicBtn">🎵</button>
@@ -288,159 +317,85 @@ const wish = document.getElementById("wish");
 const lucky = document.getElementById("lucky");
 const spinBox = document.getElementById("spinBox");
 const modal = document.getElementById("modal");
+const flipWrap=document.getElementById("flipWrap");
 
-let trollCount = 0;
-let trolling = false;
+let trollCount=0,trolling=false;
 
-const trollText = [
-  "Bạn chắc chắn muốn nhận lì xì không 😏",
-  "Khoan đã... suy nghĩ kỹ chưa 🤔",
-  "Ấn thêm phát nữa cho chắc 😝",
-  "Ủa vẫn chưa bỏ cuộc à 😆",
-  "✨ Thêm tí nữa ✨",
-  "Hệ thống đang xin vía 🧿",
-  "Đang gọi lộc về 📞",
-  "Server rung rung rồi 🖥️",
-  "Ok ok... lần cuối 😈"
+const trollText=[
+"Bạn chắc chắn muốn nhận lì xì không 😏","Khoan đã... suy nghĩ kỹ chưa 🤔","Ấn thêm phát nữa cho chắc 😝",
+"Ủa vẫn chưa bỏ cuộc à 😆","✨ Thêm tí nữa ✨","Hệ thống đang xin vía 🧿","Đang gọi lộc về 📞",
+"Server rung rung rồi 🖥️","Ok ok... lần cuối 😈"
 ];
 
+function ultraOpen(){
+  flipWrap.classList.toggle("flipped");
+  confettiBurst();
+}
+
 function openWish(){
+  ultraOpen();
   wish.style.display="block";
   lucky.style.display="none";
-  startRain();
-  boom();
+  startRain();boom();
 }
 
 function openLucky(){
   if(trolling) return;
-  trolling = true;
-  trollCount = 0;
-  showTroll();
+  trolling=true;trollCount=0;showTroll();
 }
 
-/* ===== TROLL CORE ===== */
 function showTroll(){
-  modal.style.display = "flex";
-  modal.innerHTML = "";
-
-  const box = document.createElement("div");
-  box.className = "modalBox trollBox";
-  box.innerHTML = `
-    <h3>${trollText[trollCount]}</h3>
-    <div style="margin-top:18px;display:flex;justify-content:space-around;gap:15px">
-      <button id="yesBtn">YES</button>
-      <button id="noBtn">NO</button>
-    </div>
-  `;
-
-  box.style.transform = `translate(${rand(-120,120)}px,${rand(-120,120)}px)`;
-  modal.appendChild(box);
-
-  const yes = document.getElementById("yesBtn");
-  const no = document.getElementById("noBtn");
-
-  if(trollCount < 5){
-    yes.onmouseenter = () => dodge(yes);
-  } else {
-    yes.onmouseenter = null;
-  }
-
-  yes.onclick = () => nextStep();
-  no.onclick = () => nextStep();
+  modal.style.display="flex";
+  modal.innerHTML=`<div class="modalBox"><h3>${trollText[trollCount]}</h3>
+  <button onclick="nextStep()">YES</button><button onclick="nextStep()">NO</button></div>`;
 }
 
 function nextStep(){
   trollCount++;
-  if(trollCount < 9){
-    showTroll();
-    shake(document.querySelector(".trollBox"));
-  } else {
-    trolling = false;
-    closeTroll();
-    lucky.style.display="block";
-    wish.style.display="none";
-    startRain();
-    boom();
+  if(trollCount<9) showTroll();
+  else{
+    trolling=false;modal.style.display="none";
+    lucky.style.display="block";wish.style.display="none";
+    startRain();boom();
   }
 }
 
-function closeTroll(){
-  modal.style.display="none";
-}
-
-/* ===== FUN EFFECT ===== */
-function dodge(el){
-  el.style.position = "relative";
-  el.style.left = rand(-80,80)+"px";
-  el.style.top = rand(-50,50)+"px";
-}
-
-function shake(el){
-  el.animate([
-    {transform:"translate(0,0)"},
-    {transform:"translate(-12px,0)"},
-    {transform:"translate(12px,0)"},
-    {transform:"translate(0,0)"}
-  ],{duration:300});
-}
-
-function rand(min,max){
-  return Math.random()*(max-min)+min;
-}
-
-/* ===== SPIN ===== */
+/* SPIN */
 function spin(){
   spinBox.classList.remove("spinAnim");
   void spinBox.offsetWidth;
   spinBox.classList.add("spinAnim");
-
-  setTimeout(()=>{
-    showQR();
-    boom();
-  },3000);
+  setTimeout(()=>showQR(),3500);
 }
 
 function showQR(){
   modal.style.display="flex";
   modal.innerHTML=`
-    <div class="modalBox">
-      <h3>🎉 Nhận lì xì 🎉</h3>
-      <img src="./IMG_2758.jpeg">
-      <a href="https://lixi.momo.vn/lixi/QYwxlG1Omremw2l" target="_blank">
-        <button>💰 Nhận ngay 💰</button>
-      </a>
-      <button onclick="closeTroll()">Đóng</button>
-    </div>
-  `;
+  <div class="modalBox">
+    <h3>🎉 Nhận lì xì 🎉</h3>
+    <img src="./IMG_2758.jpeg">
+    <a href="https://lixi.momo.vn/lixi/QYwxlG1Omremw2l" target="_blank">
+      <button>💰 Nhận ngay 💰</button>
+    </a>
+    <button onclick="modal.style.display='none'">Đóng</button>
+  </div>`;
 }
 
-/* ===== MUSIC ===== */
+/* MUSIC */
 const music=document.getElementById("music");
 const musicBtn=document.getElementById("musicBtn");
 let started=false;
-
 function autoPlay(){
-  if(!started){
-    music.play();
-    started=true;
-    musicBtn.classList.add("spinIcon");
-  }
+  if(!started){music.play();started=true;musicBtn.classList.add("spinIcon");}
 }
 document.addEventListener("click",autoPlay,{once:true});
-document.addEventListener("touchstart",autoPlay,{once:true});
-
 musicBtn.onclick=e=>{
   e.stopPropagation();
-  if(music.paused){
-    music.play();
-    musicBtn.classList.add("spinIcon");
-  }else{
-    music.pause();
-    musicBtn.classList.remove("spinIcon");
-  }
+  music.paused?music.play():music.pause();
+  musicBtn.classList.toggle("spinIcon");
 };
 
-/* ===== FALL ===== */
+/* FALL + CONFETTI */
 function startRain(){
   if(window.raining) return;
   window.raining=true;
@@ -449,23 +404,33 @@ function startRain(){
     el.className="fall";
     el.innerHTML=["🧧","🌸","💖","✨","🧨","💰","🐎"][Math.floor(Math.random()*7)];
     el.style.left=Math.random()*100+"vw";
-    el.style.fontSize=18+Math.random()*18+"px";
+    el.style.fontSize=18+Math.random()*22+"px";
     el.style.animationDuration=8+Math.random()*6+"s";
     document.body.appendChild(el);
     setTimeout(()=>el.remove(),14000);
-  },480);
+  },450);
 }
 
-/* ===== FIREWORK ===== */
+function confettiBurst(x=innerWidth/2,y=innerHeight/3){
+  for(let i=0;i<40;i++){
+    const el=document.createElement("div");
+    el.className="confetti";
+    el.innerHTML=["🧧","🌸","✨","💖","🎆","💰"][Math.floor(Math.random()*6)];
+    el.style.left=x+rand(-100,100)+"px";
+    el.style.fontSize=14+Math.random()*24+"px";
+    el.style.animationDuration=4+Math.random()*3+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),7000);
+  }
+}
+
+function rand(min,max){return Math.random()*(max-min)+min}
+
+/* FIREWORK */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
-
-function resize(){
-  canvas.width=innerWidth;
-  canvas.height=innerHeight;
-}
-resize(); onresize=resize;
-
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();onresize=resize;
 let particles=[];
 
 function boom(){
@@ -488,14 +453,28 @@ function draw(){
     ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fill();
-    p.x+=p.dx;
-    p.y+=p.dy;
-    p.life--;
+    p.x+=p.dx;p.y+=p.dy;p.life--;
     if(p.life<=0) particles.splice(i,1);
   });
   requestAnimationFrame(draw);
 }
 draw();
+
+/* Ripple */
+document.addEventListener("click",e=>{
+  ripple(e.clientX,e.clientY);
+  confettiBurst(e.clientX,e.clientY);
+  boom();
+});
+
+function ripple(x,y){
+  const r=document.createElement("div");
+  r.className="ripple";
+  r.style.left=x-10+"px";
+  r.style.top=y-10+"px";
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),600);
+}
 </script>
 
 </body>
